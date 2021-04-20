@@ -13,15 +13,27 @@ import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 @Component
 public class FilterUtil {
 
-	public <E> MappingJacksonValue dynamicFilter(E fiterData, Class<?> source  , Set<String> fieldsNotFiltered) {
-		
+	public <E> MappingJacksonValue dynamicFilterOutAllExcept(E fiterData, Class<?> source, Set<String> fieldsNotFiltered) {
+
 		JsonFilter jsonFilter = (JsonFilter) source.getAnnotation(JsonFilter.class);
- 		SimpleBeanPropertyFilter filter = SimpleBeanPropertyFilter.filterOutAllExcept(fieldsNotFiltered);
+		SimpleBeanPropertyFilter filter = SimpleBeanPropertyFilter.filterOutAllExcept(fieldsNotFiltered);
 		FilterProvider filters = new SimpleFilterProvider().addFilter(jsonFilter.value(), filter);
 
 		MappingJacksonValue mapping = new MappingJacksonValue(fiterData);
 		mapping.setFilters(filters);
-		
+
+		return mapping;
+	}
+
+	public <E> MappingJacksonValue dynamicSerializeAllExcept(E fiterData, Class<?> source, Set<String> fieldsFiltered) {
+
+		JsonFilter jsonFilter = (JsonFilter) source.getAnnotation(JsonFilter.class);
+		SimpleBeanPropertyFilter filter = SimpleBeanPropertyFilter.serializeAllExcept(fieldsFiltered);
+		FilterProvider filters = new SimpleFilterProvider().addFilter(jsonFilter.value(), filter);
+
+		MappingJacksonValue mapping = new MappingJacksonValue(fiterData);
+		mapping.setFilters(filters);
+
 		return mapping;
 	}
 
