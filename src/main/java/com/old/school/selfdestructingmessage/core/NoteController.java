@@ -18,16 +18,16 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 public class NoteController {
 	
 	@Autowired
-	private NoteRepository noteRepository;
+	private NoteService noteService;
 	
 	@GetMapping("/notes")
 	public List<Note> getNotes() {
-		return noteRepository.findAll();	
+		return noteService.findAll();	
 	}
 	
 	@PostMapping("/notes")
 	public ResponseEntity<Object> createUser(@Valid @RequestBody Note note) {
-		Note savedNote = noteRepository.save(note);
+		Note savedNote = noteService.save(note);
 
 		// return status of created user
 		// build uri
