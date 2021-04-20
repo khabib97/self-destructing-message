@@ -15,6 +15,8 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.validation.annotation.Validated;
 
+import com.fasterxml.jackson.annotation.JsonFilter;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,7 +26,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @Validated
-public class Note {
+@JsonFilter("NoteFilter")
+public class Note{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,6 +40,7 @@ public class Note {
 	@NotBlank
 	private String message;
 	
+	@NotBlank
 	@Size(max = 64)
 	private String password;
 
@@ -49,4 +53,5 @@ public class Note {
 	private Timestamp destructionTime;
 	
 	private boolean isActive;
+	
 }
