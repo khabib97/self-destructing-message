@@ -1,4 +1,4 @@
-package com.old.school.selfdestructingmessage.common;
+package com.old.school.selfdestructingmessage.filter;
 
 import java.util.Set;
 
