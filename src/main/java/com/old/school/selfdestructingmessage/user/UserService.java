@@ -1,6 +1,7 @@
 package com.old.school.selfdestructingmessage.user;
 
-import java.util.ArrayList;
+import java.util.Collections;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,7 +21,7 @@ public class UserService implements UserDetailsService {
 		if (user == null)
 			throw new UsernameNotFoundException("User not found with username: " + username);
 
-		return new User(user.getUsername(), user.getPassword(), new ArrayList<>());
+		return new User(user.getUsername(), user.getPassword(), Collections.emptyList()); // last element is for list of role but here we have no roles except admin
 	}
 
 }
