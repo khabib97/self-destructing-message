@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.old.school.selfdestructingmessage.common.FilterUtil;
+import com.old.school.selfdestructingmessage.filter.FilterUtil;
 
 
 @RestController
@@ -27,7 +27,7 @@ public class NoteController {
 	@Autowired
 	private FilterUtil filterUtil;
 	
-	@GetMapping("/notes")
+	@GetMapping("/admin/notes")
 	public MappingJacksonValue getNotes() {
 		
 		List<Note> notes = noteService.findAll();	    
