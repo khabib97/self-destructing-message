@@ -29,13 +29,19 @@ $$ LANGUAGE plpgsql VOLATILE;
 
 CREATE TABLE notes (
     id TEXT PRIMARY KEY DEFAULT generate_uid(16),
-	name VARCHAR(50),
-	message TEXT,
-	password VARCHAR(64),-- SHA256 256/4=64
-	email VARCHAR(50),
-	generation_time TIMESTAMP,
-	destruction_time TIMESTAMP,
-	is_active BOOLEAN
+    name VARCHAR(50),
+    message TEXT,
+    password VARCHAR(64),-- SHA256 256/4=64
+    email VARCHAR(50),
+    generation_time TIMESTAMP,
+    destruction_time TIMESTAMP,
+    is_active BOOLEAN
+);
+
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(50),
+    password VARCHAR(64) -- SHA256 256/4=64
 );
 
 ```
